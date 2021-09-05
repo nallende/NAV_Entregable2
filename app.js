@@ -1,22 +1,19 @@
 const express = require('express');
 const fs = require('fs');
 const app = express();
-const morgan = require('morgan');
+const path = require('path');
 
 const productRouter = require('./routes/productRoutes');
-const cartRouter = require('./routes/cartRoutes');
-const userRouter = require('./routes/userRoutes');
-//const { validateUser } = require('./controllers/productController');
+const carritoRouter = require('./routes/carritoRoutes');
+const adminRouter = require('./routes/adminRoutes');
+
+//app.set();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 //1) Middleware
-app.use(express.json());
-if (process.env.NODE_ENV !== 'development') {
-    app.use(morgan('dev'));
-}
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use(express.static(`${__dirname}/public`));
 
 app.use((req, res, next) => {
     console.log('Middleware funcionando');
@@ -29,17 +26,12 @@ app.use((req, res, next) => {
 });
 
 // 3) Rutas
-
+app.use('/api/admin', adminRouter);
 app.use('/api/admin/products', productRouter);
-//app.use('/api/v1/carts', cartRouter);
-//app.use('/api/v1/users', userRouter);
+app.use('/api/carritoRouter', carritoRouter);
 
 app.use((req, res, next) => {
-    res.status(404).send('Pagina No Encontrada');
-});
-
-app.use((err, res, next) => {
-    res.status(500).send('Tenemos un Problema');
+    res.status(404).send('pagina no encontrada');
 });
 
 module.exports = app;

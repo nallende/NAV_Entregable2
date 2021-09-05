@@ -1,23 +1,25 @@
 const express = require('express');
+const morgan = require('morgan');
 const fs = require('fs');
 const app = express();
+const helmet = require('helmet');
 const path = require('path');
 
 const productRouter = require('./routes/productRoutes');
 const carritoRouter = require('./routes/carritoRoutes');
 const adminRouter = require('./routes/adminRoutes');
 
-//app.set();
+//1) Middleware
+
+app.use(helmet());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.set('view engine', 'ejs');
+app.set('view', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
-
-//1) Middleware
-
-app.use((req, res, next) => {
-    console.log('Middleware funcionando');
-    next();
+app.get('/', (req, res, next) => {
+    res.render('index.ejs');
 });
 
 app.use((req, res, next) => {

@@ -1,20 +1,33 @@
 {
-  "name": "practicando4",
-  "version": "1.0.0",
-  "main": "app.js",
-  "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "dotenv": "^10.0.0",
-    "ejs": "^3.1.6",
-    "express": "^4.17.1",
-    "helmet": "^4.6.0",
-    "morgan": "^1.10.0",
-    "nodemon": "^2.0.12"
-  },
-  "description": ""
+    "name": "practicando4",
+    "version": "1.0.0",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon server.js"
+
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^10.0.0",
+        "ejs": "^3.1.6",
+        "express": "^4.17.1",
+        "helmet": "^4.6.0",
+        "mongoose": "^5.13.9",
+        "nodemon": "^2.0.12"
+    },
+    "description": "",
+    "devDependencies": {
+        "eslint": "^7.32.0",
+        "eslint-config-airbnb": "^18.2.1",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-import": "^2.24.2",
+        "eslint-plugin-jsx-a11y": "^6.4.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-react": "^7.26.0",
+        "morgan": "^1.10.0",
+        "prettier": "^2.4.1"
+    }
 }

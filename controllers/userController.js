@@ -1,59 +1,60 @@
-const Product = require('../models/productModel');
+const user = require('../models/userModel');
 
-exports.getAllProducts = async(req, res) => {
+exports.getAllUsers = async(req, res) => {
     try {
-        const products = await Product.find();
+        const users = await user.find();
 
         res.status(200).json({
             status: 'succes',
-            results: products.length,
-            data: { product: products },
+            results: users.length,
+            data: { user: users },
         });
     } catch (err) {
         res.status(404).json({ status: fail, message: err });
     }
 };
 
-exports.getProduct = async(req, res) => {
+exports.getUser = async(req, res) => {
     try {
-        const product = await Product.findById(req.params.id);
+        const user = await user.findById(req.params.id);
 
         res.status(200).json({
             status: 'succes',
-            data: { product },
+            data: { user },
         });
     } catch (err) {
         res.status(404).json({ status: fail, message: err });
     }
 };
 
-exports.createProduct = async(req, res) => {
+exports.createUser = async(req, res) => {
     try {
-        const newProduct = await Product.create(req.body);
+        const newuser = await user.create(req.body);
         res.status(201).json({
             staus: 'success',
             data: {
-                product: newProduct,
+                user: newuser,
             },
         });
     } catch (err) {
         res.status(400).json({
             stauts: 'fail',
-            message: 'Producto Invalido',
+            message: 'Usuario Invalido',
+            err: console.log(err.message),
         });
     }
 };
 
-exports.updateProduct = async(req, res) => {
+exports.updateUser = async(req, res) => {
     try {
-        const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+        const user = await user.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
             runValidators: true,
         });
         res.status(200).json({
             status: 'success',
             data: {
-                product: product,
+                user: user,
             },
         });
     } catch (err) {
@@ -61,13 +62,13 @@ exports.updateProduct = async(req, res) => {
     }
 };
 
-exports.deleteProduct = async(req, res) => {
+exports.deleteUser = async(req, res) => {
     try {
-        const product = await Product.findByIdAndDelete(req.params.id);
+        const user = await user.findByIdAndDelete(req.params.id);
 
         res.status(200).json({
             status: 'success',
-            alert: 'Producto ha sido Eliminado',
+            alert: 'Usuario ha sido Eliminado',
         });
     } catch (err) {
         res.status(404).json({ status: 'fail', message: err });
